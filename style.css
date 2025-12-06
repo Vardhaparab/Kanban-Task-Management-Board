@@ -1,0 +1,539 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+:root {
+    --background-color: #000000;
+    --background-bg-color: rgba(39, 38, 38, 0.748);
+    --primary-text-color: #f4f4f4;
+    --bg-button-color: #1a1a1a;
+    --bg-task-color: #2a2a2adf;
+    --delete-color: #ff4d4d;
+    --hover: rgba(186, 184, 184, 0.349);
+    --color: rgba(150, 148, 148, 0.866);
+
+    /*padding variables*/
+    --nav-padding: 15px 30px;
+    --section-padding: 15px 30px;
+    --padding-s: 5px;
+    --padding-m: 10px;
+    --padding-l: 15px;
+    --padding-xl: 20px;
+    --padding-xxl: 30px;
+
+    /*Border radius variables*/
+    --border-radius-s: 5px;
+    --border-radius-m: 10px;
+    --border-radius-l: 15px;
+    --border-radius-xl: 20px;
+    --border-radius-xxl: 30px;
+
+    --box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+
+    --prioritybgh: rgba(157, 4, 4, 0.888);
+    --prioritybgm: rgba(222, 146, 5, 0.848);
+    --prioritybgl: rgba(2, 153, 2, 0.901);
+}
+
+[data-theme="light"] {
+    --background-color: #ffffff;
+    --primary-text-color: #1e1e1e;
+    --hover: rgba(186, 184, 184, 0.847);
+
+    --prioritybgh: rgba(242, 2, 2, 0.888);
+    --prioritybgm: rgba(255, 166, 0, 0.848);
+    --prioritybgl: rgba(3, 169, 3, 0.901);
+
+    --background-bg-color: #f4f4f5;
+    --bg-button-color: #dddddd;
+    --bg-task-color: #ffffff;
+    --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+
+    --delete-color: #ff4d4d;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+nav {
+    padding: var(--nav-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--background-color);
+}
+
+nav .left {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+nav button {
+    background-color: var(--bg-button-color);
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    padding: var(--padding-m) var(--padding-l);
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+}
+
+nav button:hover {
+    background-color: var(--hover);
+    border-radius: var(--padding-m);
+}
+
+.nav-btn {
+    display: flex;
+    gap: var(--padding-m);
+}
+
+.nav-btn .searchdiv {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    padding: var(--padding-s) var(--padding-m);
+    background-color: var(--bg-button-color);
+    gap: 8px;
+    border-radius: var(--border-radius-m);
+}
+
+.nav-btn .search .icon-search {
+    color: var(--primary-text-color);
+}
+
+.nav-btn .searchdiv input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    font-size: 0.8em;
+}
+
+.searchdiv #search-cancel {
+    color: var(--primary-text-color);
+    font-size: 0.8em;
+}
+
+.searchdiv #search-cancel:hover {
+    background-color: var(--background-color);
+    border-radius: var(--padding-m);
+}
+
+section {
+    padding: var(--section-padding);
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: var(--padding-xxl);
+}
+
+section .task-column {
+    flex-grow: 1;
+    width: 100%;
+    background-color: var(--background-bg-color);
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding-m);
+    gap: var(--padding-m);
+    border-radius: var(--border-radius-m);
+}
+
+section .task-column.hover-over {
+    border: 2px dashed var(--primary-text-color);
+    scale: 1.05;
+    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+section .task-column .heading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+section .task-column .task {
+    background-color: var(--bg-task-color);
+    margin-top: 7px;
+    padding: var(--padding-xl);
+    border-radius: var(--border-radius-m);
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-s);
+    cursor: grab;
+    box-shadow: var(--box-shadow);
+
+}
+
+.taskLabel {
+    display: flex;
+    gap: var(--padding-s);
+}
+
+.task .priority {
+    display: flex;
+    align-self: center;
+    /* align-items: center;
+    justify-content: center; */
+    padding: 2px 7px;
+    border-radius: var(--border-radius-s);
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-left: 10px;
+}
+
+.priority.low {
+    background-color: var(--prioritybgl);
+    color: var(--primary-text-color);
+}
+
+.priority.medium {
+    background-color: var(--prioritybgm);
+    color: var(--primary-text-color);
+}
+
+.priority.high {
+    background-color: var(--prioritybgh);
+    color: var(--primary-text-color);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskLabel h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task.dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.task-menu {
+    position: relative;
+    cursor: pointer;
+
+}
+
+.menu-icon {
+    font-size: 22px;
+    padding: 5px;
+}
+
+.task-menu .dropdown {
+    position: absolute;
+    right: 0;
+    top: 25px;
+    /* background: var(--card-bg); */
+    background-color: var(--background-bg-color);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 120px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-s);
+}
+
+.dropdown-item svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2;
+    color: var(--primary-text-color);
+}
+
+.task-menu .dropdown.hidden {
+    display: none;
+}
+
+.task-menu .dropdown .show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* 
+.task.removing {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.3s ease;
+}
+
+
+.task.show {
+    opacity: 1;
+    transform: translateY(0);
+} */
+
+section .task-column .task button {
+    align-self: flex-end;
+    cursor: pointer;
+    padding: var(--padding-s) var(--padding-m);
+    border-radius: var(--border-radius-s);
+    border: none;
+    outline: none;
+    background-color: var(--delete-color);
+    color: var(--primary-text-color);
+}
+
+.modal {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal .bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(61, 61, 61, 0.489);
+    backdrop-filter: blur(5px);
+}
+
+
+.modal-center select {
+    padding: 8px;
+    border-radius: var(--border-radius-s);
+    border: none;
+    outline: none;
+    background-color: var(--bg-task-color);
+    color: var(--primary-text-color);
+}
+
+.modal .center {
+    background-color: var(--bg-button-color);
+    padding: var(--padding-xxl);
+    border-radius: var(--border-radius-m);
+    z-index: 10;
+    position: relative;
+    width: 30%;
+
+}
+
+.modal-center .dates {
+    display: flex;
+    gap: var(--padding-xxl);
+}
+
+.modal-center .dates #startDate,
+.modal-center .dates #dueDate {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+}
+
+.modal-center .dates #start-date,
+.modal-center .dates #due-date {
+    padding: var(--padding-m) var(--padding-xxl);
+}
+
+.due-date {
+    color: var(--color);
+    font-size: 0.8em;
+    font-weight: 400;
+    margin-top: var(--padding-s);
+}
+
+.modal-center label {
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: block;
+    color: var(--primary-text-color);
+}
+
+#task-priority-input {
+    padding: 8px;
+    border-radius: var(--border-radius-s);
+    border: none;
+    outline: none;
+    background-color: var(--bg-task-color);
+    color: var(--primary-text-color);
+    margin-bottom: 15px;
+}
+
+.modal .center .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: var(--padding-s);
+}
+
+.modal .modal-center {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+}
+
+.modal .center input,
+.modal .center textarea {
+    background-color: var(--bg-task-color);
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    padding: var(--padding-m);
+    border-radius: var(--border-radius-s);
+}
+
+.modal .center button {
+    background-color: var(--bg-task-color);
+    border: none;
+    outline: none;
+    color: var(--primary-text-color);
+    padding: var(--padding-m) var(--padding-l);
+    cursor: pointer;
+    border-radius: var(--border-radius-m);
+    width: fit-content;
+    align-self: center;
+}
+
+@media screen and (max-width:640px) {
+
+    section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    section.board {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 20px;
+        padding-bottom: 20px;
+    }
+
+    .task-column {
+        min-width: 85%;
+        scroll-snap-align: start;
+    }
+
+    nav .left {
+        font-size: 1em;
+    }
+
+    .nav-btn {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .searchdiv {
+        flex-grow: 1;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+
+    .modal .center {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .modal-center input,
+    .modal-center textarea {
+        font-size: 0.9em;
+    }
+
+    .add-task-btn {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width:400px) {
+    section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-btn button {
+        padding: var(--padding-s);
+        font-size: 0.5em;
+    }
+
+    nav .left {
+        font-size: 0.7em;
+    }
+
+    .nav-btn .searchdiv {
+        padding: var(--padding-s);
+        font-size: 0.8em;
+        gap: 2px;
+    }
+
+    .nav-btn .searchdiv input {
+        font-size: 0.6em;
+    }
+
+    section .task-column .task {
+        margin-top: 7px;
+        padding: var(--padding-m);
+    }
+
+    .taskLabel {
+        font-size: 0.7em;
+        gap: var(--padding-s);
+    }
+
+    .task .priority {  
+        padding: 2px 5px;
+        border-radius: var(--border-radius-s);
+        font-size: 0.6em;
+        margin-left: 7px;
+    }
+    
+    .task-header{
+        margin-bottom: 1px;
+    }
+}
